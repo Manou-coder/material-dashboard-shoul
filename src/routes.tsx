@@ -10,12 +10,13 @@ import {
 import { Home, Profile, Tables, Notifications } from '@/pages/dashboard'
 import { SignIn, SignUp } from '@/pages/auth'
 import { Zmanim } from './pages/dashboard/zmanim'
+import { RouteAppProps } from './types/routes'
 
 const icon = {
   className: 'w-5 h-5 text-inherit',
 }
 
-export const routes = [
+export const routes: RouteAppProps[] = [
   {
     layout: 'dashboard',
     pages: [
@@ -51,24 +52,24 @@ export const routes = [
       },
     ],
   },
-  // {
-  //   title: 'auth pages',
-  //   layout: 'auth',
-  //   pages: [
-  //     {
-  //       icon: <ArrowRightOnRectangleIcon {...icon} />,
-  //       name: 'sign in',
-  //       path: '/sign-in',
-  //       element: <SignIn />,
-  //     },
-  //     {
-  //       icon: <UserPlusIcon {...icon} />,
-  //       name: 'sign up',
-  //       path: '/sign-up',
-  //       element: <SignUp />,
-  //     },
-  //   ],
-  // },
+  {
+    title: 'auth pages',
+    layout: 'auth',
+    pages: [
+      {
+        icon: <ArrowRightOnRectangleIcon {...icon} />,
+        name: 'sign in',
+        path: '/sign-in',
+        element: <SignIn />,
+      },
+      {
+        icon: <UserPlusIcon {...icon} />,
+        name: 'sign up',
+        path: '/sign-up',
+        element: <SignUp />,
+      },
+    ],
+  },
 ]
 
 export default routes
