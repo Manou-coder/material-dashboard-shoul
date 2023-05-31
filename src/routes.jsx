@@ -5,62 +5,69 @@ import {
   BellIcon,
   ArrowRightOnRectangleIcon,
   UserPlusIcon,
-} from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications } from "@/pages/dashboard";
-import { SignIn, SignUp } from "@/pages/auth";
+} from '@heroicons/react/24/solid'
+import { Home, Profile, Tables, Notifications } from '@/pages/dashboard'
+import { SignIn, SignUp } from '@/pages/auth'
+import { Zmanim } from './pages/dashboard/zmanim'
 
 const icon = {
-  className: "w-5 h-5 text-inherit",
-};
+  className: 'w-5 h-5 text-inherit',
+}
 
 export const routes = [
   {
-    layout: "dashboard",
+    layout: 'dashboard',
     pages: [
       {
         icon: <HomeIcon {...icon} />,
-        name: "dashboard",
-        path: "/home",
+        name: 'dashboard',
+        path: '/home',
         element: <Home />,
       },
       {
         icon: <UserCircleIcon {...icon} />,
-        name: "profile",
-        path: "/profile",
+        name: 'profile',
+        path: '/profile',
         element: <Profile />,
       },
       {
         icon: <TableCellsIcon {...icon} />,
-        name: "tables",
-        path: "/tables",
+        name: 'tables',
+        path: '/tables',
         element: <Tables />,
       },
       {
         icon: <BellIcon {...icon} />,
-        name: "notifactions",
-        path: "/notifactions",
+        name: 'notifactions',
+        path: '/notifactions',
         element: <Notifications />,
+      },
+      {
+        icon: <BellIcon {...icon} />,
+        name: 'zmanim',
+        path: '/zmanim',
+        element: <Zmanim />,
       },
     ],
   },
   {
-    title: "auth pages",
-    layout: "auth",
+    title: 'auth pages',
+    layout: 'auth',
     pages: [
       {
         icon: <ArrowRightOnRectangleIcon {...icon} />,
-        name: "sign in",
-        path: "/sign-in",
+        name: 'sign in',
+        path: '/sign-in',
         element: <SignIn />,
       },
       {
         icon: <UserPlusIcon {...icon} />,
-        name: "sign up",
-        path: "/sign-up",
+        name: 'sign up',
+        path: '/sign-up',
         element: <SignUp />,
       },
     ],
   },
-];
+]
 
-export default routes;
+export default routes
