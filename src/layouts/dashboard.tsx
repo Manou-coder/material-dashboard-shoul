@@ -11,7 +11,7 @@ import routes from '@/routes'
 import { useMaterialTailwindController, setOpenConfigurator } from '@/context'
 
 export function Dashboard() {
-  const [controller, dispatch] = useMaterialTailwindController()
+  const [controller, dispatch]: any = useMaterialTailwindController()
   const { sidenavType } = controller
 
   return (
@@ -39,7 +39,7 @@ export function Dashboard() {
             ({ layout, pages }) =>
               layout === 'dashboard' &&
               pages.map(({ path, element }) => (
-                <Route exact path={path} element={element} />
+                <Route path={path} element={element} />
               ))
           )}
         </Routes>
