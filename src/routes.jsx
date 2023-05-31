@@ -5,6 +5,7 @@ import {
   BellIcon,
   ArrowRightOnRectangleIcon,
   UserPlusIcon,
+  ClockIcon,
 } from '@heroicons/react/24/solid'
 import { Home, Profile, Tables, Notifications } from '@/pages/dashboard'
 import { SignIn, SignUp } from '@/pages/auth'
@@ -25,6 +26,12 @@ export const routes = [
         element: <Home />,
       },
       {
+        icon: <ClockIcon {...icon} />,
+        name: 'zmanim',
+        path: '/zmanim',
+        element: <Zmanim />,
+      },
+      {
         icon: <UserCircleIcon {...icon} />,
         name: 'profile',
         path: '/profile',
@@ -42,32 +49,26 @@ export const routes = [
         path: '/notifactions',
         element: <Notifications />,
       },
-      {
-        icon: <BellIcon {...icon} />,
-        name: 'zmanim',
-        path: '/zmanim',
-        element: <Zmanim />,
-      },
     ],
   },
-  {
-    title: 'auth pages',
-    layout: 'auth',
-    pages: [
-      {
-        icon: <ArrowRightOnRectangleIcon {...icon} />,
-        name: 'sign in',
-        path: '/sign-in',
-        element: <SignIn />,
-      },
-      {
-        icon: <UserPlusIcon {...icon} />,
-        name: 'sign up',
-        path: '/sign-up',
-        element: <SignUp />,
-      },
-    ],
-  },
+  // {
+  //   title: 'auth pages',
+  //   layout: 'auth',
+  //   pages: [
+  //     {
+  //       icon: <ArrowRightOnRectangleIcon {...icon} />,
+  //       name: 'sign in',
+  //       path: '/sign-in',
+  //       element: <SignIn />,
+  //     },
+  //     {
+  //       icon: <UserPlusIcon {...icon} />,
+  //       name: 'sign up',
+  //       path: '/sign-up',
+  //       element: <SignUp />,
+  //     },
+  //   ],
+  // },
 ]
 
 export default routes
