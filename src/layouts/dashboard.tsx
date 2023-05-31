@@ -19,7 +19,9 @@ export function Dashboard() {
       <Sidenav
         routes={routes}
         brandImg={
-          sidenavType === 'dark' ? '/img/logo-ct.png' : '/img/logo-ct-dark.png'
+          sidenavType === 'dark'
+            ? '/img/logo_menouchat-chalom_blanc.png'
+            : '/img/logo_menouchat-chalom_noir.png'
         }
       />
       <div className="min-h-screen flex flex-col p-4 xl:ml-80">
