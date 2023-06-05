@@ -11,7 +11,15 @@ export const Zmanim = () => {
     <section className="mt-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <ZmanimCard type="Chol" color="blue" />
+          <ZmanimCard
+            type="Chol"
+            color="blue"
+            zmanim={{
+              shacharit: '8:00',
+              mincha: '14:00',
+              arvit: '20:00',
+            }}
+          />
         </div>
         <div>
           <ZmanimCard type="Shabat" color="green" />
@@ -42,12 +50,19 @@ export const Zmanim = () => {
   )
 }
 
+interface ZmanimTime {
+  shacharit: string
+  mincha: string
+  arvit: string
+}
+
 interface ZmanimCardProps {
   type: string
   color?: color
+  zmanim?: ZmanimTime
 }
 
-const ZmanimCard = ({ type, color = 'red' }: ZmanimCardProps) => {
+const ZmanimCard = ({ type, color = 'red', zmanim }: ZmanimCardProps) => {
   return (
     <Card>
       <CardHeader
@@ -59,9 +74,15 @@ const ZmanimCard = ({ type, color = 'red' }: ZmanimCardProps) => {
       </CardHeader>
       <CardBody className="p-4 pt-16">
         <div className="flex flex-col space-y-2">
-          <ZmanimView name="Shacharit" schedule="07:30" />
-          <ZmanimView name="Shacharit" schedule="07:30" />
-          <ZmanimView name="Shacharit" schedule="07:30" />
+          {zmanim?.shacharit && (
+            <ZmanimView name="Shacharit" schedule={zmanim.shacharit} />
+          )}
+          {zmanim?.mincha && (
+            <ZmanimView name="Mincha" schedule={zmanim.mincha} />
+          )}
+          {zmanim?.arvit && (
+            <ZmanimView name="Arvit" schedule={zmanim?.arvit} />
+          )}
         </div>
       </CardBody>
     </Card>

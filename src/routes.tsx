@@ -11,6 +11,7 @@ import { Home, Profile, Tables, Notifications } from '@/pages/dashboard'
 import { SignIn, SignUp } from '@/pages/auth'
 import { Zmanim } from './pages/dashboard/zmanim'
 import { RouteAppProps } from './types/routes'
+import { ZmaneiAyom } from './pages/dashboard/zmanei-ayom'
 
 const icon = {
   className: 'w-5 h-5 text-inherit',
@@ -31,6 +32,12 @@ export const routes: RouteAppProps[] = [
         name: 'zmanim',
         path: '/zmanim',
         element: <Zmanim />,
+      },
+      {
+        icon: <ClockIcon {...icon} />,
+        name: 'zmanei ayom',
+        path: '/zmanei-ayom',
+        element: <ZmaneiAyom />,
       },
       {
         icon: <UserCircleIcon {...icon} />,
