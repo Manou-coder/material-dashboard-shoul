@@ -12,7 +12,8 @@ import {
 import { v4 as uuidv4 } from 'uuid'
 import { ReactNode, useEffect, useRef } from 'react'
 import { Control, Controller, UseFormRegister } from 'react-hook-form'
-import { capitalizeFirstLetter } from './capitalize'
+import { capitalizeFirstLetter } from './string'
+import clsx from 'clsx'
 
 interface CustomInputProps extends InputProps {
   inputName: string
@@ -150,11 +151,11 @@ export const CustomButton = ({
 }: CustomButtonProps) => {
   return (
     <Button
-      className="w-full flex justify-center items-center"
+      className={clsx(className, 'flex justify-center items-center')}
       disabled={isLoading}
       type="submit"
     >
-      {isLoading ? <Spinner className={className} /> : children}
+      {isLoading ? <Spinner className={'h-4 w-4'} /> : children}
     </Button>
   )
 }

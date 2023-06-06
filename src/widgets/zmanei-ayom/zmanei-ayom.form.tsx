@@ -5,6 +5,7 @@ import {
   CustomSelect,
 } from '@/lib/custom-components'
 import { Inputs } from '@/lib/validation-zod'
+import { Checkbox, Typography } from '@material-tailwind/react'
 import {
   Control,
   FormState,
@@ -32,32 +33,45 @@ export const ZmaneiAyomForm = ({
   formState,
   onSubmit,
   isLoading,
+  watch,
 }: Props) => {
   const { errors } = formState ?? {}
+  // console.log('watch: ', watch())
+  // console.log('errors: ', errors)
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-12 gap-2">
-        <div className="col-span-6">
+        <div className="col-span-12 md:col-span-3">
+          <CustomInput
+            required
+            type="date"
+            defaultValue={new Date().toISOString().split('T')[0]}
+            register={register}
+            inputName="date"
+            errors={errors}
+          />
+        </div>
+        <div className="col-span-12 md:col-span-3">
           <CustomInput
             required
             register={register}
             labelName="City Name"
-            inputName="city"
+            inputName="locationName"
             errors={errors}
           />
         </div>
-        <div className="col-span-6">
+        <div className="col-span-12 md:col-span-6">
           <CustomSelect
             required
             control={control}
             register={register}
             labelName="Time Zone ID"
             inputName="timeZoneId"
-            list={timeZoneIdList}
+            list={[...timeZoneIdList]}
             errors={errors}
           />
         </div>
-        <div className="col-span-4">
+        <div className="col-span-12 md:col-span-3">
           <CustomInput
             defaultValue={'0'}
             type="number"
@@ -69,7 +83,7 @@ export const ZmaneiAyomForm = ({
             errors={errors}
           />
         </div>
-        <div className="col-span-4">
+        <div className="col-span-12 md:col-span-3">
           <CustomInput
             defaultValue={'0'}
             type="number"
@@ -81,19 +95,32 @@ export const ZmaneiAyomForm = ({
             errors={errors}
           />
         </div>
-        <div className="col-span-4">
+        <div className="col-span-12 md:col-span-3">
           <CustomInput
             min={0}
             defaultValue={'0'}
             type="number"
             register={register}
-            inputName="altitude"
+            inputName="elevation"
             errors={errors}
           />
         </div>
+        <div className="col-span-12 md:col-span-3">
+          <Checkbox
+            {...register('complexZmanim')}
+            defaultChecked
+            label={<Typography>Complex Zmanim</Typography>}
+          />
+        </div>
         <div className="col-span-12">
-          <CustomButton isLoading={isLoading} className="text-white">
-            Send
+          <CustomButton
+            isLoading={isLoading}
+            className="text-white mx-auto w-32 h-9"
+            size="md"
+          >
+            <Typography variant="small" className="font-bold">
+              Send
+            </Typography>
           </CustomButton>
         </div>
       </div>

@@ -1,30 +1,52 @@
-import { Inputs } from '@/lib/validation-zod'
-import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
-import { FormState } from 'react-hook-form'
+import { formatDate } from '@/lib/dates'
+import { convertCamelCaseToWords } from '@/lib/string'
+import { MetaData, ZmanimData } from '@/types/zmanim'
+import { Typography, TypographyProps } from '@material-tailwind/react'
 
 interface Props {
-  formState: FormState<Inputs>
+  data: ZmanimData
 }
 
-export const ZmaneiAyomList = ({ formState }: Props) => {
-  console.log('formState: ', formState)
-  // Queries
-  const {
-    data,
-    error,
-    isLoading: isQueryLoading,
-  } = useQuery({ queryKey: ['todos'], queryFn: getTodos })
-
+export const ZmaneiAyomList = ({ data }: Props) => {
   console.log('data: ', data)
-  console.log('error: ', error)
-  console.log('isQueryLoading: ', isQueryLoading)
+  if (!data) return <h1>pas encore de data</h1>
+  const { metadata, Zmanim, BasicZmanim } = data.zmanim
+  return (
+    <div className="mt-10">
+      <ItemList data={metadata} dataName="MetaData" />
+      <ItemList
+        data={Zmanim ? Zmanim : BasicZmanim}
+        dataName="Zmanim"
+        isOnlyDate
+      />
+    </div>
+  )
+}
 
-  async function getTodos() {
-    const { data } = await axios.get(
-      'https://jsonplaceholder.typicode.com/postshygtfre'
-    )
-    return data
-  }
-  return <div>Hello world</div>
+interface ItemListProps {
+  data: object
+  dataName: string
+  isOnlyDate?: boolean
+}
+
+const ItemList = ({ data, dataName, isOnlyDate = false }: ItemListProps) => {
+  console.log('data: ', data)
+  if (!data) return null
+  return (
+    <>
+      <Typography variant="h2" className="mt-2 mb-1 text-center">
+        {dataName}
+      </Typography>
+      {Object.entries(data).map(([key, value]) => (
+        <div key={key} className="flex justify-between items-center">
+          <Typography variant="lead" color="gray" className="">
+            {convertCamelCaseToWords(key)}:
+          </Typography>
+          <Typography variant="lead" color="gray" className="">
+            {isOnlyDate ? formatDate(value.toString()) : value.toString()}
+          </Typography>
+        </div>
+      ))}
+    </>
+  )
 }

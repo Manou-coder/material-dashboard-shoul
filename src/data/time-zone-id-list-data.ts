@@ -281,4 +281,4 @@ export const timeZoneIdList = [
   'Pacific/Truk',
   'Pacific/Wake',
   'Pacific/Wallis',
-]
+] as const
