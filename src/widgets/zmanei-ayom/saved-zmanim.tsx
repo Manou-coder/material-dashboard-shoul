@@ -5,17 +5,21 @@ import {
   Card,
   IconButton,
   Typography,
+  Button,
 } from '@material-tailwind/react'
 import { TrashIcon, PencilSquareIcon } from '@heroicons/react/24/solid'
 import { SavedZmanim as SavedZmanimList } from '@/data/saved-zmanim'
 import { v4 as uuidv4 } from 'uuid'
+import { Dispatch, SetStateAction } from 'react'
 
 interface Props {
   list: SavedZmanimList[]
+  setOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export const SavedZmanim = ({ list }: Props) => {
+export const SavedZmanim = ({ list, setOpen }: Props) => {
   if (!list) return null
+  console.log('list: ', list)
   return (
     <Card className="mt-[70px]">
       <List>
@@ -38,6 +42,7 @@ export const SavedZmanim = ({ list }: Props) => {
           </ListItem>
         ))}
       </List>
+      <Button onClick={() => setOpen(true)}>Add city</Button>
     </Card>
   )
 }
