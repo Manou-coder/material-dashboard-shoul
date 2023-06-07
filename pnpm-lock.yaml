@@ -55,6 +55,9 @@ dependencies:
   zod:
     specifier: 3.22.0-canary.20230522T011705
     version: 3.22.0-canary.20230522T011705
+  zustand:
+    specifier: ^4.3.8
+    version: 4.3.8(react@18.2.0)
 
 devDependencies:
   '@tanstack/eslint-plugin-query':
@@ -2629,4 +2632,20 @@ packages:
 
   /zod@3.22.0-canary.20230522T011705:
     resolution: {integrity: sha512-gEl7btSMLlfuPxtQK/Ak1vK8Ik5lrHQR1ZLEf3upsMJFn46oh074YOt2yGn8nhTlrRK9xW4v1ut126xRMj+JRw==}
+    dev: false
+
+  /zustand@4.3.8(react@18.2.0):
+    resolution: {integrity: sha512-4h28KCkHg5ii/wcFFJ5Fp+k1J3gJoasaIbppdgZFO4BPJnsNxL0mQXBSFgOgAdCdBj35aDTPvdAJReTMntFPGg==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false

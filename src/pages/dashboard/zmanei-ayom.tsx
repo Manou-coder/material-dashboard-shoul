@@ -11,6 +11,8 @@ import { useEffect, useState } from 'react'
 import { DialogComponent } from '@/widgets/zmanei-ayom/DialogComponent'
 import { Button } from '@material-tailwind/react'
 import { useCities } from '@/hooks/use-cities'
+import { useBookStore } from '@/store/bookStore'
+import { shallow } from 'zustand/shallow'
 
 interface CustomError {
   message: string
