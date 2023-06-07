@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify'
 
-export const saveInLocalStorage = (name: string, item: object) => {
+export const saveInLocalStorage = (name: string, item: object | []) => {
   try {
-    const data = localStorage.setItem(name, JSON.stringify([item]))
+    const data = localStorage.setItem(name, JSON.stringify(item))
     return { data }
   } catch (error) {
     toast.error('Error saving local storage')
@@ -10,14 +10,21 @@ export const saveInLocalStorage = (name: string, item: object) => {
   }
 }
 
-export const getFromLocalStorage = (name: string) => {
+interface GetFromLocalStorageResult<T> {
+  data?: object | [] | null
+  error?: any
+}
+
+export const getFromLocalStorage = <T,>(
+  name: string
+): GetFromLocalStorageResult<T> => {
   try {
     const jsonData = localStorage.getItem(name)
-    if (!jsonData) return
+    if (!jsonData) return { data: null }
     const data = JSON.parse(jsonData)
     return { data }
   } catch (error) {
     toast.error('Error getting from local storage')
-    return error
+    return { error }
   }
 }

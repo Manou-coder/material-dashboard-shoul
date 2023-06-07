@@ -7,11 +7,10 @@ import { Inputs, schema } from '@/lib/validation-zod'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { SavedZmanim } from '@/widgets/zmanei-ayom/saved-zmanim'
-import { savedZmanim } from '@/data/saved-zmanim'
 import { useEffect, useState } from 'react'
 import { DialogComponent } from '@/widgets/zmanei-ayom/DialogComponent'
 import { Button } from '@material-tailwind/react'
-import { getFromLocalStorage, saveInLocalStorage } from '@/lib/locale-storage'
+import { useCities } from '@/hooks/use-cities'
 
 interface CustomError {
   message: string
@@ -21,29 +20,30 @@ export const ZmaneiAyom = () => {
   const { value: isLoading, setValue: setIsLoading } = useToggle()
   const { value: open, setValue: setOpen, toggle: toggleOpen } = useToggle()
   const [data, setData] = useState<any>(null)
-  const [cities, setCities] = useState<any>(null)
+  const { cities, setCities } = useCities()
 
   const { register, handleSubmit, watch, control, setError, formState } =
     useForm<Inputs>({ resolver: zodResolver(schema) })
 
   useEffect(() => {
-    const cities = getFromLocalStorage('cities')
-    setCities(cities)
-    console.log('cities: ', cities)
-  }, [])
+    localStorage.setItem('cities', JSON.stringify(cities))
+  }, [cities])
 
-  const handleGetZmanim = async () => {
+  const handleGetZmanim = async (formData: Inputs) => {
+    setData(null)
+    setIsLoading(true)
     const url = 'http://localhost:3000/api/zmanim/all'
     try {
       const data = await axios.get(url, {
-        params: { ...watch() },
+        params: formData,
       })
-      const cities = getFromLocalStorage('cities')
-      saveInLocalStorage('cities', watch())
+      setCities([...cities, formData])
       setData(data)
       setOpen(false)
+      setIsLoading(false)
       return
     } catch (error) {
+      setIsLoading(false)
       toast.error((error as CustomError).message)
       return
     }
@@ -51,16 +51,18 @@ export const ZmaneiAyom = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     console.log('formData: ', formData)
-    setIsLoading(true)
-    await handleGetZmanim()
-    setIsLoading(false)
+    handleGetZmanim(formData)
   }
 
   return (
     <>
       {cities ? (
         <aside className="fixed right-0 top-20 z-50 my-4 mr-4 h-[calc(100vh-32px)] w-72 rounded-xl">
-          <SavedZmanim list={cities?.data} setOpen={setOpen} />
+          <SavedZmanim
+            list={cities}
+            setOpen={setOpen}
+            handleGetZmanim={handleGetZmanim}
+          />
         </aside>
       ) : (
         <div className="flex justify-center items-center">
@@ -87,7 +89,7 @@ export const ZmaneiAyom = () => {
         />
       </DialogComponent>
       <div className="mt-10 mr-[304px]">
-        <ZmaneiAyomList data={data?.data} />
+        <ZmaneiAyomList data={data?.data} isLoading={isLoading} />
       </div>
     </>
   )
