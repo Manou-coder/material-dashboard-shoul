@@ -6,13 +6,14 @@ import { ZmaneiAyomList } from '@/widgets/zmanei-ayom/zmanei-ayom.list'
 import { Inputs, schema } from '@/lib/validation-zod'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { SavedZmanim } from '@/widgets/zmanei-ayom/saved-zmanim'
+import { SavedCities } from '@/widgets/zmanei-ayom/saved-cities'
 import { useEffect, useState } from 'react'
 import { DialogComponent } from '@/widgets/zmanei-ayom/DialogComponent'
-import { Button } from '@material-tailwind/react'
-import { useCities } from '@/hooks/use-cities'
-import { useBookStore } from '@/store/bookStore'
-import { shallow } from 'zustand/shallow'
+import { Button, Option, Select } from '@material-tailwind/react'
+import { useCityStore } from '@/store/cityStore'
+import { City } from '@/data/saved-zmanim'
+import { v4 as uuidv4 } from 'uuid'
+import { ZmanimData } from '@/types/zmanim'
 
 interface CustomError {
   message: string
@@ -21,54 +22,81 @@ interface CustomError {
 export const ZmaneiAyom = () => {
   const { value: isLoading, setValue: setIsLoading } = useToggle()
   const { value: open, setValue: setOpen, toggle: toggleOpen } = useToggle()
-  const [data, setData] = useState<any>(null)
-  const { cities, setCities } = useCities()
+  const [data, setData] = useState<ZmanimData | null>(null)
+  const [actualCity, setActualCity] = useState<City | null>(null)
+  const cities = useCityStore((state) => state.cities)
+  const addCity = useCityStore((state) => state.addCity)
+  const updateCity = useCityStore((state) => state.updateCity)
 
-  const { register, handleSubmit, watch, control, setError, formState } =
+  const { register, handleSubmit, watch, control, setError, formState, reset } =
     useForm<Inputs>({ resolver: zodResolver(schema) })
 
-  useEffect(() => {
-    localStorage.setItem('cities', JSON.stringify(cities))
-  }, [cities])
-
-  const handleGetZmanim = async (formData: Inputs) => {
+  const handleGetZmanim = async (formData: Inputs | City) => {
     setData(null)
-    setIsLoading(true)
-    const url = 'http://localhost:3000/api/zmanim/all'
-    try {
-      const data = await axios.get(url, {
-        params: formData,
-      })
-      setCities([...cities, formData])
-      setData(data)
-      setOpen(false)
-      setIsLoading(false)
-      return
-    } catch (error) {
-      setIsLoading(false)
-      toast.error((error as CustomError).message)
-      return
+    const data = await getZmanimFromServer(formData)
+    if (formData.id) {
+      const existingCity = cities.find((c) => c.id === actualCity?.id)
+      const city = { ...existingCity, ...formData }
+      updateCity(city as City)
+    } else {
+      const city = { ...formData, id: uuidv4() }
+      addCity(city as City)
     }
+    setData(data.data)
+    setOpen(false)
+    setIsLoading(false)
+    setActualCity(null)
+    reset()
   }
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-    console.log('formData: ', formData)
-    handleGetZmanim(formData)
+    const cityId = actualCity?.id
+    handleGetZmanim({ ...formData, id: cityId })
+  }
+
+  const getZmanimFromServer = async (city: City | Inputs) => {
+    setIsLoading(true)
+    const url = 'http://localhost:3000/api/zmanim/all'
+    try {
+      const response = await axios.get(url, {
+        params: city,
+      })
+      const data = response.data as ZmanimData | null
+      if (!data) {
+        throw new Error('no data from server')
+      }
+      setData(data)
+      setIsLoading(false)
+      reset()
+      return { data }
+    } catch (error) {
+      setData(null)
+      setIsLoading(false)
+      toast.error((error as CustomError).message)
+      return { data: null }
+    }
   }
 
   return (
     <>
       {cities ? (
         <aside className="fixed right-0 top-20 z-50 my-4 mr-4 h-[calc(100vh-32px)] w-72 rounded-xl">
-          <SavedZmanim
-            list={cities}
+          <SavedCities
+            reset={reset}
+            setActualCity={setActualCity}
             setOpen={setOpen}
-            handleGetZmanim={handleGetZmanim}
+            getZmanimFromServer={getZmanimFromServer}
           />
         </aside>
       ) : (
         <div className="flex justify-center items-center">
-          <Button onClick={() => setOpen(true)} className="mt-40">
+          <Button
+            onClick={() => {
+              setActualCity(null)
+              setOpen(true)
+            }}
+            className="mt-40"
+          >
             Add city
           </Button>
         </div>
@@ -88,10 +116,19 @@ export const ZmaneiAyom = () => {
           formState={formState}
           onSubmit={onSubmit}
           isLoading={isLoading}
+          defaultValues={{
+            date: actualCity?.date,
+            longitude: actualCity?.longitude,
+            locationName: actualCity?.locationName,
+            latitude: actualCity?.latitude,
+            elevation: actualCity?.elevation,
+            timeZoneId: actualCity?.timeZoneId,
+            complexZmanim: actualCity?.complexZmanim ? 'true' : 'false',
+          }}
         />
       </DialogComponent>
       <div className="mt-10 mr-[304px]">
-        <ZmaneiAyomList data={data?.data} isLoading={isLoading} />
+        <ZmaneiAyomList data={data} isLoading={isLoading} />
       </div>
     </>
   )

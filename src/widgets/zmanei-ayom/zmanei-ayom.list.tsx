@@ -4,7 +4,7 @@ import { MetaData, ZmanimData } from '@/types/zmanim'
 import { Spinner, Typography, TypographyProps } from '@material-tailwind/react'
 
 interface Props {
-  data: ZmanimData
+  data: ZmanimData | null
   isLoading: boolean
 }
 

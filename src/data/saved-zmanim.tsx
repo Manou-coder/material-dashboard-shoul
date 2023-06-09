@@ -4,12 +4,13 @@ import { timeZoneIdList } from './time-zone-id-list-data'
 type FormatDateZmanim =
   `${number}${number}${number}${number}-${number}${number}-${number}${number}`
 
-export interface SavedZmanim extends Inputs {
+export interface City extends Inputs {
+  id: string
   timeZoneId: (typeof timeZoneIdList)[number]
   date: FormatDateZmanim
 }
 
-export const savedZmanim: SavedZmanim[] = [
+export const savedZmanim: City[] = [
   {
     locationName: 'Jerusalem',
     longitude: '32',
@@ -18,6 +19,7 @@ export const savedZmanim: SavedZmanim[] = [
     timeZoneId: 'Asia/Jerusalem',
     date: '2021-03-04',
     complexZmanim: false,
+    id: 'klj',
   },
   {
     locationName: 'Paris',
@@ -27,6 +29,7 @@ export const savedZmanim: SavedZmanim[] = [
     timeZoneId: 'Asia/Jerusalem',
     date: '2021-03-04',
     complexZmanim: false,
+    id: 'kj',
   },
   {
     locationName: 'New York',
@@ -36,5 +39,6 @@ export const savedZmanim: SavedZmanim[] = [
     timeZoneId: 'Asia/Jerusalem',
     date: '2021-03-04',
     complexZmanim: false,
+    id: 'klfj',
   },
 ]

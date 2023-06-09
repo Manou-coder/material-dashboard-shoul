@@ -7,11 +7,15 @@ export const schema = z.object({
   longitude: z.string().min(1, { message: errorMessageRequired }),
   latitude: z.string().min(1, { message: errorMessageRequired }),
   elevation: z.string(),
-  timeZoneId: z.string({
-    required_error: errorMessageRequired,
-  }),
+  timeZoneId: z
+    .string({
+      required_error: errorMessageRequired,
+    })
+    .min(1, { message: errorMessageRequired }),
   date: z.string().min(1, { message: errorMessageRequired }),
   complexZmanim: z.boolean(),
 })
 
-export type Inputs = z.infer<typeof schema>
+type ZodInputs = z.infer<typeof schema>
+
+export type Inputs = ZodInputs & { id?: string }

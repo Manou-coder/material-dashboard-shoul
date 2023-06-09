@@ -33,7 +33,7 @@ interface Props {
   isLoading: boolean
   defaultValues?: DefaultValuesForm
 }
-export const ZmaneiAyomForm = ({
+export const ZmanimForm = ({
   register,
   handleSubmit,
   control,

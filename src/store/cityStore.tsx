@@ -1,15 +1,49 @@
-import { Inputs } from '@/lib/validation-zod'
+import { City } from '@/data/saved-zmanim'
 import { create } from 'zustand'
 
-interface IBook {
-  cities: Inputs[]
-  addCity: (newCity: Inputs) => void
+const CITIES = 'cities'
+
+const getCitiesFromLocalStorage = () => {
+  const citiesJson = localStorage.getItem(CITIES) || null
+  if (!citiesJson) return null
+  const cities = JSON.parse(citiesJson)
+  return cities
 }
 
-export const useBookStore = create<IBook>((set, get) => ({
-  cities: [],
-  addCity: (newCity: Inputs) => {
-    const citiesState = get().cities
-    set({ cities: [...citiesState, newCity] })
+interface CityStore {
+  cities: City[]
+  addCity: (newCity: City) => void
+  removeCity: (newCity: City) => void
+  updateCity: (newCity: City) => void
+}
+
+export const useCityStore = create<CityStore>((set, get) => ({
+  cities: getCitiesFromLocalStorage(),
+  addCity: (newCity: City) => {
+    const citiesState = get().cities || []
+    const newCities = [...citiesState, newCity]
+    const cities = { cities: newCities }
+    const JsonCities = JSON.stringify(newCities)
+    localStorage.setItem(CITIES, JsonCities)
+    set(cities)
+  },
+  removeCity: (newCity: City) => {
+    const citiesState = get().cities || []
+    const newCities = citiesState.filter((c) => c.id !== newCity.id)
+    const cities = { cities: newCities }
+    const JsonCities = JSON.stringify(newCities)
+    localStorage.setItem(CITIES, JsonCities)
+    set(cities)
+  },
+  updateCity: (newCity: City) => {
+    const citiesState = get().cities || []
+    const exsistingCityIndex = citiesState.findIndex((c) => c.id === newCity.id)
+    if (exsistingCityIndex >= 0) {
+      citiesState[exsistingCityIndex] = newCity
+    }
+    const cities = { cities: citiesState }
+    const JsonCities = JSON.stringify(citiesState)
+    localStorage.setItem(CITIES, JsonCities)
+    set(cities)
   },
 }))

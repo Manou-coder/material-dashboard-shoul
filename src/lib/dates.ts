@@ -7,7 +7,7 @@ interface DateObject {
 }
 
 export const parseDuration = (duration: string): DateObject | null => {
-  console.log('duration: ', duration)
+  // console.log('duration: ', duration)
   const regex = /PT(\d+)H(?:(\d+)M)?([\d.]+)S/
   const matches = duration.match(regex)
 

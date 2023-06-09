@@ -32,6 +32,7 @@ export const CustomInput = ({
   errors,
   type,
   defaultValue,
+  value,
   min,
   max,
 }: CustomInputProps) => {
@@ -46,6 +47,7 @@ export const CustomInput = ({
   return (
     <div ref={inputRef} className="col-span-6">
       <Input
+        value={value}
         className={className}
         type={type}
         {...register(inputName)}
@@ -80,6 +82,7 @@ interface CustomSelectProps extends OptionalChildrenSelectProps {
 }
 
 export const CustomSelect = ({
+  defaultValue,
   className,
   control,
   list,
@@ -94,6 +97,7 @@ export const CustomSelect = ({
       return
     }
     addRedStarToLabel(inputRef.current, required, labelName)
+    addDefaultValues(inputRef.current, defaultValue)
   }, [inputRef])
 
   return (
@@ -101,12 +105,14 @@ export const CustomSelect = ({
       <Controller
         name={inputName}
         control={control}
+        defaultValue={defaultValue}
         render={({ field }) => (
           <Select
             className={className}
             {...field}
             label={labelName}
             error={errors && errors[inputName] ? true : false}
+            // value="" value ne marche pas avec le controller de form
           >
             {list &&
               list.map((element) => (
@@ -138,6 +144,18 @@ function addRedStarToLabel(
   if (labelDiv && required) {
     labelDiv.innerHTML =
       labelName + '<span class="inline-block text-red-500 ml-0.5">*</span>'
+  }
+}
+
+function addDefaultValues(
+  ref: HTMLDivElement,
+  value: string | number | readonly string[] | undefined
+) {
+  const firstChild = ref.children[0]
+  const buttonDiv = firstChild && firstChild.children[0]
+  const spanDiv = buttonDiv && buttonDiv.children[0]
+  if (spanDiv && typeof value === 'string') {
+    spanDiv.innerHTML = value
   }
 }
 
