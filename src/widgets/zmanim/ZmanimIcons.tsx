@@ -5,6 +5,8 @@ import { useToggle } from '@/hooks/use-toggle'
 import { useState } from 'react'
 import { ZmanimAuto } from './ZmanimAuto'
 import { ZmanimManual } from './ZmanimManual'
+import { useCityStore } from '@/store/cityStore'
+import { toast } from 'react-toastify'
 
 interface Props {
   withTrash?: boolean
@@ -13,15 +15,20 @@ interface Props {
 export const ZmanimIcons = ({ withTrash = false }: Props) => {
   const { value: open, setValue: setOpen, toggle: toggleOpen } = useToggle()
   const [auto, setAuto] = useState<boolean>(false)
+  const actualCityForZamnim = useCityStore((state) => state.actualCityForZamnim)
   console.log('auto: ', auto)
+
+  const handleOpenZmanim = () => {
+    if (!actualCityForZamnim) {
+      toast.error('Please select a city before opening')
+      return
+    }
+    setOpen(true)
+  }
   return (
     <>
       <div className="-mt-[5px]">
-        <IconButton
-          onClick={() => setOpen(true)}
-          variant="text"
-          color="blue-gray"
-        >
+        <IconButton onClick={handleOpenZmanim} variant="text" color="blue-gray">
           <PencilSquareIcon className="h-5 w-5" />
         </IconButton>
         {withTrash && (

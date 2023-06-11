@@ -30,7 +30,7 @@ if (root !== null) {
         <ThemeProvider>
           <MaterialTailwindControllerProvider>
             <QueryClientProvider client={queryClient}>
-              <ToastContainer autoClose={8000} />
+              <ToastContainer autoClose={8000} style={{ zIndex: '10000' }} />
               <App />
             </QueryClientProvider>
           </MaterialTailwindControllerProvider>

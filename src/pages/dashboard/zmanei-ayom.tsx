@@ -14,10 +14,8 @@ import { useCityStore } from '@/store/cityStore'
 import { City } from '@/data/saved-zmanim'
 import { v4 as uuidv4 } from 'uuid'
 import { ZmanimData } from '@/types/zmanim'
-
-interface CustomError {
-  message: string
-}
+import { CustomError } from '@/types/global'
+import { ZMANIM_ALL } from '@/lib/urls'
 
 export const ZmaneiAyom = () => {
   const { value: isLoading, setValue: setIsLoading } = useToggle()
@@ -56,9 +54,8 @@ export const ZmaneiAyom = () => {
 
   const getZmanimFromServer = async (city: City | Inputs) => {
     setIsLoading(true)
-    const url = 'http://localhost:3000/api/zmanim/all'
     try {
-      const response = await axios.get(url, {
+      const response = await axios.get(ZMANIM_ALL, {
         params: city,
       })
       const data = response.data as ZmanimData | null

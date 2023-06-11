@@ -2,6 +2,7 @@ import { City } from '@/data/saved-zmanim'
 import { create } from 'zustand'
 
 const CITIES = 'cities'
+const ACTUAL_CITY_FOR_ZMANIM_AUTO = 'actual_city_for_zmanim_auto'
 
 const getCitiesFromLocalStorage = () => {
   const citiesJson = localStorage.getItem(CITIES) || null
@@ -10,11 +11,21 @@ const getCitiesFromLocalStorage = () => {
   return cities
 }
 
+const getActualCityForZmanimAutoFromLocalStorage = () => {
+  const actualCityForZAJson =
+    localStorage.getItem(ACTUAL_CITY_FOR_ZMANIM_AUTO) || null
+  if (!actualCityForZAJson) return null
+  const actualCityForZA = JSON.parse(actualCityForZAJson)
+  return actualCityForZA
+}
+
 interface CityStore {
   cities: City[]
   addCity: (newCity: City) => void
   removeCity: (newCity: City) => void
   updateCity: (newCity: City) => void
+  actualCityForZamnim: City | null
+  updateActualCityForZamnim: (newCity: City) => void
 }
 
 export const useCityStore = create<CityStore>((set, get) => ({
@@ -45,5 +56,13 @@ export const useCityStore = create<CityStore>((set, get) => ({
     const JsonCities = JSON.stringify(citiesState)
     localStorage.setItem(CITIES, JsonCities)
     set(cities)
+  },
+  actualCityForZamnim: getActualCityForZmanimAutoFromLocalStorage(),
+  updateActualCityForZamnim: (newCity: City | null) => {
+    if (newCity) {
+      const JsonNewCity = JSON.stringify(newCity)
+      localStorage.setItem(ACTUAL_CITY_FOR_ZMANIM_AUTO, JsonNewCity)
+    }
+    set({ actualCityForZamnim: newCity })
   },
 }))
