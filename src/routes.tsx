@@ -18,12 +18,12 @@ export const routes: RouteAppProps[] = [
   {
     layout: 'dashboard',
     pages: [
-      {
-        icon: <HomeIcon {...icon} />,
-        name: 'dashboard',
-        path: '/home',
-        element: <Home />,
-      },
+      // {
+      //   icon: <HomeIcon {...icon} />,
+      //   name: 'dashboard',
+      //   path: '/home',
+      //   element: <Home />,
+      // },
       {
         icon: <ClockIcon {...icon} />,
         name: 'zmanim',
@@ -36,24 +36,24 @@ export const routes: RouteAppProps[] = [
         path: '/tefilot',
         element: <Tefilot />,
       },
-      {
-        icon: <UserCircleIcon {...icon} />,
-        name: 'profile',
-        path: '/profile',
-        element: <Profile />,
-      },
-      {
-        icon: <TableCellsIcon {...icon} />,
-        name: 'tables',
-        path: '/tables',
-        element: <Tables />,
-      },
-      {
-        icon: <BellIcon {...icon} />,
-        name: 'notifactions',
-        path: '/notifactions',
-        element: <Notifications />,
-      },
+      // {
+      //   icon: <UserCircleIcon {...icon} />,
+      //   name: 'profile',
+      //   path: '/profile',
+      //   element: <Profile />,
+      // },
+      // {
+      //   icon: <TableCellsIcon {...icon} />,
+      //   name: 'tables',
+      //   path: '/tables',
+      //   element: <Tables />,
+      // },
+      // {
+      //   icon: <BellIcon {...icon} />,
+      //   name: 'notifactions',
+      //   path: '/notifactions',
+      //   element: <Notifications />,
+      // },
     ],
   },
   // {

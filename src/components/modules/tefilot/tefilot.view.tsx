@@ -1,13 +1,18 @@
+import { Yom } from '@/data/yamim-data'
 import { TefilotCards } from './cards/tefilot-cards'
 import { InputSavedCity } from './saved-city/input-saved-city'
 
-export const TefilotView = () => {
+interface Props {
+  data?: Yom[] | null
+}
+
+export const TefilotView = ({ data }: Props) => {
   return (
     <section className="mt-6">
       <div className="mb-40">
         <InputSavedCity />
       </div>
-      <TefilotCards />
+      <TefilotCards data={data} />
     </section>
   )
 }
