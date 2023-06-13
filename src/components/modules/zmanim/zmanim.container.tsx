@@ -16,6 +16,7 @@ export const ZmanimContainer = () => {
   const [actualCity, setActualCity] = useState<City | null>(null)
 
   const { data, isLoading, error } = useZmanim()
+  console.log('data: ', data)
 
   const { mutate, isPostLoading } = usePostCity({ setOpen })
 

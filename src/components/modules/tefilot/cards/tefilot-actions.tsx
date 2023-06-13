@@ -7,9 +7,12 @@ import { TefilotFormManual } from '../forms/tefilot-form-manual'
 import { useCityStore } from '@/utils/store/cityStore'
 import { toast } from 'react-toastify'
 import { Modal } from '@/components/modal/modal'
+import { Tefila, Yom } from '@/data/yamim-data'
 
 interface Props {
   withTrash?: boolean
+  yom: Yom
+  tefila: Tefila
 }
 
 export const TefilotActions = ({ withTrash = false }: Props) => {

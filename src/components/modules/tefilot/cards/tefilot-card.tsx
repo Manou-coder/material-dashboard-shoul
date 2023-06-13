@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const TefilotCard = ({ color = 'red', yom }: Props) => {
-  const { name, tefilot } = yom
+  const { tefilot, name } = yom
   return (
     <Card>
       <CardHeader
@@ -27,10 +27,12 @@ export const TefilotCard = ({ color = 'red', yom }: Props) => {
       </CardHeader>
       <CardBody className="p-4 pt-16">
         <div className="flex flex-col space-y-2">
-          {Object.entries(tefilot).map((tefila) => (
+          {tefilot.map((tefila) => (
             <TefilotZman
-              name={capitalizeFirstLetter(tefila[0])}
-              schedule={tefila[1]}
+              key={yom.id}
+              yom={yom}
+              tefila_name={capitalizeFirstLetter(tefila.tefila_name)}
+              schedule={tefila.schedule}
             />
           ))}
         </div>

@@ -10,6 +10,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
+import { useZmanim } from '@/utils/hooks/use-zmanim'
 
 type Zman = {
   zmanName: string
@@ -19,64 +20,28 @@ type Zman = {
 type ZmanimList = Zman[] | []
 
 export const TefilotFormAuto = () => {
-  const actualCityForZamnim = useCityStore((state) => state.actualCityForZamnim)
-  const [zmanimList, setZmanimList] = useState<ZmanimList>([])
-  const getZmanim = async () => {
-    const response = await getZmanimForZmanimAuto(actualCityForZamnim)
-    const data = response.data as any
-    const zmanim = data?.zmanim?.Zmanim
-    if (!zmanim) {
-      toast.error('not found data')
-      return
-    }
-    const zmanimArr = Object.keys(zmanim).map((key) => ({
-      zmanName: key,
-      zmanSchedule: zmanim[key],
-    }))
-    console.log('zmanim: ', zmanim)
-    setZmanimList(zmanimArr)
-  }
-  useEffect(() => {
-    getZmanim()
-  }, [])
+  const { data, error, isLoading } = useZmanim()
+  console.log('data: ', data)
 
-  // const zmanim = Object.keys(zmanimMock).map((cle) => ({
-  //   zmanName: cle,
-  //   zmanSchedule: zmanimMock[cle],
-  // }))
+  if (error) {
+    return null
+  }
 
   return (
     <div>
       <Typography variant="h5">ZmanimAuto</Typography>
       <Select label="Refer to">
-        {zmanimList.map((zman: Zman) => (
-          <Option key={uuidv4()} value={zman.zmanName}>
-            <div className="flex gap-2">
-              <Typography color="black">{zman.zmanName}</Typography>
-              <Typography>(ex: {zman.zmanSchedule})</Typography>
-            </div>
-          </Option>
-        ))}
+        {/* {data &&
+          data.map((zman: Zman) => (
+            <Option key={uuidv4()} value={zman.zmanName}>
+              <div className="flex gap-2">
+                <Typography color="black">{zman.zmanName}</Typography>
+                <Typography>(ex: {zman.zmanSchedule})</Typography>
+              </div>
+            </Option>
+          ))} */}
+        <Option>hello</Option>
       </Select>
     </div>
   )
-}
-
-const getZmanimForZmanimAuto = async (city: City | null) => {
-  if (!city) {
-    throw new Error('no city selected')
-  }
-  try {
-    const response = await axios.get(ZMANIM_ALL, {
-      params: { ...city, complexZmanim: true },
-    })
-    const data = response.data as ZmanimData | null
-    if (!data) {
-      throw new Error('no data from server')
-    }
-    return { data }
-  } catch (error) {
-    toast.error((error as CustomError).message)
-    return { data: null }
-  }
 }

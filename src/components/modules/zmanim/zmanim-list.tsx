@@ -3,17 +3,14 @@ import { convertCamelCaseToWords } from '@/lib/string'
 import { MetaData, ZmanimData } from '@/types/zmanim'
 import { Spinner, Typography, TypographyProps } from '@material-tailwind/react'
 
-interface Props {
-  data: ZmanimData | null
+interface Props extends ZmanimData {
   isLoading: boolean
 }
 
 export const ZmanimList = ({ data, isLoading }: Props) => {
-  // console.log('isLoading: ', isLoading)
-  // console.log('data: ', data)
   if (isLoading) return <Spinner className={'h-20 w-20'} />
   if (!data) return <h1>pas encore de data</h1>
-  const { metadata, Zmanim, BasicZmanim } = data.data
+  const { metadata, Zmanim, BasicZmanim } = data
   return (
     <div className="mt-10">
       <ItemList data={metadata} dataName="MetaData" />
