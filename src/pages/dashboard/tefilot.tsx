@@ -1,13 +1,5 @@
-import { TefilotCards } from '@/widgets/tefilot/cards/tefilot-cards'
-import { InputSavedCity } from '@/widgets/tefilot/input-saved-city'
+import { TefilotContainer } from '@/widgets/tefilot/tefilot.container'
 
 export const Tefilot = () => {
-  return (
-    <section className="mt-6">
-      <div className="mb-40">
-        <InputSavedCity />
-      </div>
-      <TefilotCards />
-    </section>
-  )
+  return <TefilotContainer />
 }
