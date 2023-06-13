@@ -1,4 +1,4 @@
-import { ZmanimContainer } from '@/widgets/zmanim/zmanim.container'
+import { ZmanimContainer } from '@/widgets/modules/zmanim/zmanim.container'
 
 export const Zmanim = () => {
   return <ZmanimContainer />

@@ -6,7 +6,7 @@ import {
   Footer,
 } from '@/widgets/layout'
 import routes from '@/routes'
-import { useMaterialTailwindController } from '@/context'
+import { useMaterialTailwindController } from '@/utils/context'
 
 export function Dashboard() {
   const [controller, dispatch]: any = useMaterialTailwindController()

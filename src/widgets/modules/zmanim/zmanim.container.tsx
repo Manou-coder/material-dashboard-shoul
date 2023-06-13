@@ -1,5 +1,5 @@
 import { City } from '@/data/saved-zmanim'
-import { useToggle } from '@/hooks/use-toggle'
+import { useToggle } from '@/utils/hooks/use-toggle'
 import { Inputs, schema } from '@/lib/validation-zod'
 import { CustomError } from '@/types/global'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -8,8 +8,8 @@ import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { ZmanimView } from './zmanim.view'
-import { useZmanim } from '@/hooks/use-zmanim'
-import { usePostCity } from '@/hooks/use-post-city'
+import { useZmanim } from '@/utils/hooks/use-zmanim'
+import { usePostCity } from '@/utils/hooks/use-post-city'
 
 export const ZmanimContainer = () => {
   const { value: open, setValue: setOpen, toggle: toggleOpen } = useToggle()

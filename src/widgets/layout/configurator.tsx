@@ -11,7 +11,7 @@ import {
   setSidenavColor,
   setSidenavType,
   setFixedNavbar,
-} from '@/context'
+} from '@/utils/context'
 
 export function Configurator() {
   const [controller, dispatch]: any = useMaterialTailwindController()

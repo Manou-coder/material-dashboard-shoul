@@ -10,7 +10,7 @@ import {
   useMaterialTailwindController,
   setOpenConfigurator,
   setOpenSidenav,
-} from '@/context'
+} from '@/utils/context'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 
 export function DashboardNavbar() {

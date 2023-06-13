@@ -1,4 +1,4 @@
-import { useCity } from '@/hooks/use-city'
+import { useCity } from '@/utils/hooks/use-city'
 import { Input } from '@material-tailwind/react'
 
 export const InputSavedCity = () => {

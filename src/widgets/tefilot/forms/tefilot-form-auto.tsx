@@ -1,7 +1,7 @@
 import { City } from '@/data/saved-zmanim'
 import { ZMANIM_ALL } from '@/lib/urls'
 // import { zmanimMock } from '@/data/zmanim-mock'
-import { useCityStore } from '@/store/cityStore'
+import { useCityStore } from '@/utils/store/cityStore'
 import { CustomError } from '@/types/global'
 import { ZmanimData } from '@/types/zmanim'
 import { Option, Select, Typography } from '@material-tailwind/react'
