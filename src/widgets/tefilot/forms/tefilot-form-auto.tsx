@@ -18,7 +18,7 @@ type Zman = {
 
 type ZmanimList = Zman[] | []
 
-export const ZmanimAuto = () => {
+export const TefilotFormAuto = () => {
   const actualCityForZamnim = useCityStore((state) => state.actualCityForZamnim)
   const [zmanimList, setZmanimList] = useState<ZmanimList>([])
   const getZmanim = async () => {

@@ -33,7 +33,7 @@ interface Props {
   isLoading: boolean
   defaultValues?: DefaultValuesForm
 }
-export const ZmanimForm = ({
+export const TefilotForm = ({
   register,
   handleSubmit,
   control,

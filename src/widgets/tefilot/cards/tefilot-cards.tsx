@@ -1,11 +1,10 @@
-import React from 'react'
-import { ZmanimCard } from './ZmanimCard'
+import { TefilotCard } from './tefilot-card'
 
-export const ZmanimCards = () => {
+export const TefilotCards = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div className="col-span-2">
-        <ZmanimCard
+        <TefilotCard
           type="Chol"
           color="blue"
           zmanim={{
@@ -16,10 +15,10 @@ export const ZmanimCards = () => {
         />
       </div>
       <div>
-        <ZmanimCard type="Shabat" color="green" />
+        <TefilotCard type="Shabat" color="green" />
       </div>
       <div>
-        <ZmanimCard type="Chol" />
+        <TefilotCard type="Chol" />
       </div>
     </div>
   )

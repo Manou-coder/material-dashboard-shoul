@@ -1,4 +1,4 @@
-import { ZmanimCards } from '@/widgets/tefilot/ZmanimCards'
+import { TefilotCards } from '@/widgets/tefilot/cards/tefilot-cards'
 import { InputSavedCity } from '@/widgets/tefilot/input-saved-city'
 
 export const Tefilot = () => {
@@ -7,7 +7,7 @@ export const Tefilot = () => {
       <div className="mb-40">
         <InputSavedCity />
       </div>
-      <ZmanimCards />
+      <TefilotCards />
     </section>
   )
 }

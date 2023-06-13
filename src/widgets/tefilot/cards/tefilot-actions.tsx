@@ -1,10 +1,10 @@
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
-import { IconButton, Input, Switch } from '@material-tailwind/react'
-import { DialogComponent } from '../zmanei-ayom/DialogComponent'
+import { IconButton, Switch } from '@material-tailwind/react'
+import { DialogComponent } from '../../zmanei-ayom/DialogComponent'
 import { useToggle } from '@/hooks/use-toggle'
 import { useState } from 'react'
-import { ZmanimAuto } from './tefilot-auto'
-import { ZmanimManual } from './ZmanimManual'
+import { TefilotFormAuto } from '../forms/tefilot-form-auto'
+import { TefilotFormManual } from '../forms/tefilot-form-manual'
 import { useCityStore } from '@/store/cityStore'
 import { toast } from 'react-toastify'
 
@@ -12,7 +12,7 @@ interface Props {
   withTrash?: boolean
 }
 
-export const ZmanimIcons = ({ withTrash = false }: Props) => {
+export const TefilotActions = ({ withTrash = false }: Props) => {
   const { value: open, setValue: setOpen, toggle: toggleOpen } = useToggle()
   const [auto, setAuto] = useState<boolean>(false)
   const actualCityForZamnim = useCityStore((state) => state.actualCityForZamnim)
@@ -48,7 +48,7 @@ export const ZmanimIcons = ({ withTrash = false }: Props) => {
           defaultChecked={false}
           label="Auto"
         />
-        {!auto ? <ZmanimManual /> : <ZmanimAuto />}
+        {!auto ? <TefilotFormManual /> : <TefilotFormAuto />}
       </DialogComponent>
     </>
   )

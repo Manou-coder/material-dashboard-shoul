@@ -5,9 +5,9 @@ import {
   CardBody,
 } from '@material-tailwind/react'
 import { color } from '@material-tailwind/react/types/components/alert'
-import { ZmanimList } from './ZmanimList'
+import { TefilotZman } from './tefilot-zman'
 
-interface ZmanimTime {
+interface TefilotTime {
   shacharit: string
   mincha: string
   arvit: string
@@ -16,10 +16,10 @@ interface ZmanimTime {
 interface ZmanimCardProps {
   type: string
   color?: color
-  zmanim?: ZmanimTime
+  zmanim?: TefilotTime
 }
 
-export const ZmanimCard = ({
+export const TefilotCard = ({
   type,
   color = 'red',
   zmanim,
@@ -37,12 +37,12 @@ export const ZmanimCard = ({
       <CardBody className="p-4 pt-16">
         <div className="flex flex-col space-y-2">
           {zmanim.shacharit && (
-            <ZmanimList name="Shacharit" schedule={zmanim.shacharit} />
+            <TefilotZman name="Shacharit" schedule={zmanim.shacharit} />
           )}
           {zmanim.mincha && (
-            <ZmanimList name="Mincha" schedule={zmanim.mincha} />
+            <TefilotZman name="Mincha" schedule={zmanim.mincha} />
           )}
-          {zmanim.arvit && <ZmanimList name="Arvit" schedule={zmanim.arvit} />}
+          {zmanim.arvit && <TefilotZman name="Arvit" schedule={zmanim.arvit} />}
         </div>
       </CardBody>
     </Card>
