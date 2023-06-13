@@ -8,25 +8,16 @@ import {
   Typography,
 } from '@material-tailwind/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import { ModalTypes } from '@/types/modal-types'
 
-interface Props {
+interface Props extends ModalTypes {
   title?: string
-  open: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
-  toggleOpen: () => void
   children: ReactNode
 }
 
-export const DialogComponent = ({
-  children,
-  title,
-  open,
-  setOpen,
-  toggleOpen,
-}: Props) => {
+export const Modal = ({ children, title, open, toggleOpen }: Props) => {
   return (
     <>
-      {/* <Button onClick={toggleOpen}>Sign In</Button> */}
       <Dialog
         size="lg"
         open={open}

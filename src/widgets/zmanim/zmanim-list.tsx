@@ -8,7 +8,7 @@ interface Props {
   isLoading: boolean
 }
 
-export const ZmaneiAyomList = ({ data, isLoading }: Props) => {
+export const ZmanimList = ({ data, isLoading }: Props) => {
   // console.log('isLoading: ', isLoading)
   // console.log('data: ', data)
   if (isLoading) return <Spinner className={'h-20 w-20'} />

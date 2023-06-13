@@ -1,6 +1,6 @@
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { IconButton, Switch } from '@material-tailwind/react'
-import { DialogComponent } from '../../zmanei-ayom/DialogComponent'
+import { Modal } from '../../modal/modal'
 import { useToggle } from '@/hooks/use-toggle'
 import { useState } from 'react'
 import { TefilotFormAuto } from '../forms/tefilot-form-auto'
@@ -37,7 +37,7 @@ export const TefilotActions = ({ withTrash = false }: Props) => {
           </IconButton>
         )}
       </div>
-      <DialogComponent
+      <Modal
         title="Zmanim options"
         open={open}
         setOpen={setOpen}
@@ -49,7 +49,7 @@ export const TefilotActions = ({ withTrash = false }: Props) => {
           label="Auto"
         />
         {!auto ? <TefilotFormManual /> : <TefilotFormAuto />}
-      </DialogComponent>
+      </Modal>
     </>
   )
 }

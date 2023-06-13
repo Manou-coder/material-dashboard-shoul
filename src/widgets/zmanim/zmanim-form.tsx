@@ -4,45 +4,24 @@ import {
   CustomInput,
   CustomSelect,
 } from '@/lib/custom-components'
-import { Inputs } from '@/lib/validation-zod'
+import { ZmanimFormTypes } from '@/types/zmanim-form-types'
 import { Checkbox, Typography } from '@material-tailwind/react'
-import {
-  Control,
-  FormState,
-  SubmitHandler,
-  UseFormHandleSubmit,
-  UseFormRegister,
-  UseFormSetError,
-  UseFormWatch,
-} from 'react-hook-form'
-
-type KeysOfStringType<T> = {
-  [K in keyof T]?: string
-}
-
-type DefaultValuesForm = KeysOfStringType<Inputs>
 
 interface Props {
-  register: UseFormRegister<Inputs>
-  handleSubmit: UseFormHandleSubmit<Inputs>
-  watch: UseFormWatch<Inputs>
-  control: Control<Inputs>
-  setError: UseFormSetError<Inputs>
-  formState: FormState<Inputs>
-  onSubmit: SubmitHandler<Inputs>
-  isLoading: boolean
-  defaultValues?: DefaultValuesForm
+  form: ZmanimFormTypes
 }
-export const ZmaneiAyomForm = ({
-  register,
-  handleSubmit,
-  control,
-  formState,
-  onSubmit,
-  isLoading,
-  watch,
-  defaultValues = {},
-}: Props) => {
+
+export const ZmanimForm = ({ form }: Props) => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState,
+    onSubmit,
+    isLoading,
+    watch,
+    defaultValues = {},
+  } = form
   const { errors } = formState ?? {}
   // console.log('watch: ', watch())
   const currentDate = new Date().toISOString().split('T')[0]

@@ -3,15 +3,12 @@ import {
   UserCircleIcon,
   TableCellsIcon,
   BellIcon,
-  ArrowRightOnRectangleIcon,
-  UserPlusIcon,
   ClockIcon,
 } from '@heroicons/react/24/solid'
 import { Home, Profile, Tables, Notifications } from '@/pages/dashboard'
-import { SignIn, SignUp } from '@/pages/auth'
 import { Tefilot } from './pages/dashboard/tefilot'
 import { RouteAppProps } from './types/routes'
-import { ZmaneiAyom } from './pages/dashboard/zmanei-ayom'
+import { Zmanim } from './pages/dashboard/zmanim'
 
 const icon = {
   className: 'w-5 h-5 text-inherit',
@@ -29,15 +26,15 @@ export const routes: RouteAppProps[] = [
       },
       {
         icon: <ClockIcon {...icon} />,
-        name: 'tefilot',
-        path: '/tefilot',
-        element: <Tefilot />,
+        name: 'zmanim',
+        path: '/zmanim',
+        element: <Zmanim />,
       },
       {
         icon: <ClockIcon {...icon} />,
-        name: 'zmanei ayom',
-        path: '/zmanei-ayom',
-        element: <ZmaneiAyom />,
+        name: 'tefilot',
+        path: '/tefilot',
+        element: <Tefilot />,
       },
       {
         icon: <UserCircleIcon {...icon} />,
