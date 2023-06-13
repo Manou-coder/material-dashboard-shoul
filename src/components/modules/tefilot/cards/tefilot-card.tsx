@@ -6,25 +6,16 @@ import {
 } from '@material-tailwind/react'
 import { color } from '@material-tailwind/react/types/components/alert'
 import { TefilotZman } from './tefilot-zman'
+import { Yom } from '@/data/yamim-data'
+import { capitalizeFirstLetter } from '@/lib/string'
 
-interface TefilotTime {
-  shacharit: string
-  mincha: string
-  arvit: string
-}
-
-interface ZmanimCardProps {
-  type: string
+interface Props {
   color?: color
-  zmanim?: TefilotTime
+  yom: Yom
 }
 
-export const TefilotCard = ({
-  type,
-  color = 'red',
-  zmanim,
-}: ZmanimCardProps) => {
-  if (!zmanim) return null
+export const TefilotCard = ({ color = 'red', yom }: Props) => {
+  const { name, tefilot } = yom
   return (
     <Card>
       <CardHeader
@@ -32,17 +23,16 @@ export const TefilotCard = ({
         color={color}
         className="absolute -mt-4 grid p-4 place-items-center"
       >
-        <Typography variant="h4">{type}</Typography>
+        <Typography variant="h4">{name}</Typography>
       </CardHeader>
       <CardBody className="p-4 pt-16">
         <div className="flex flex-col space-y-2">
-          {zmanim.shacharit && (
-            <TefilotZman name="Shacharit" schedule={zmanim.shacharit} />
-          )}
-          {zmanim.mincha && (
-            <TefilotZman name="Mincha" schedule={zmanim.mincha} />
-          )}
-          {zmanim.arvit && <TefilotZman name="Arvit" schedule={zmanim.arvit} />}
+          {Object.entries(tefilot).map((tefila) => (
+            <TefilotZman
+              name={capitalizeFirstLetter(tefila[0])}
+              schedule={tefila[1]}
+            />
+          ))}
         </div>
       </CardBody>
     </Card>
