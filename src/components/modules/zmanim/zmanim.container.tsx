@@ -28,8 +28,6 @@ export const ZmanimContainer = () => {
   }
 
   if (error) {
-    const customError = error as CustomError
-    toast.error(customError.message)
     return <h1>ERROR</h1>
   }
   return (
