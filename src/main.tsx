@@ -16,6 +16,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@material-tailwind/react'
 import { MaterialTailwindControllerProvider } from '@/context'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ToastContainer } from 'react-toastify'
 import '../src/styles/globals.css'
 import 'react-toastify/dist/ReactToastify.css'
@@ -32,6 +33,7 @@ if (root !== null) {
             <QueryClientProvider client={queryClient}>
               <ToastContainer autoClose={8000} style={{ zIndex: '10000' }} />
               <App />
+              <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
           </MaterialTailwindControllerProvider>
         </ThemeProvider>

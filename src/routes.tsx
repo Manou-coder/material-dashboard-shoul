@@ -9,7 +9,7 @@ import {
 } from '@heroicons/react/24/solid'
 import { Home, Profile, Tables, Notifications } from '@/pages/dashboard'
 import { SignIn, SignUp } from '@/pages/auth'
-import { Zmanim } from './pages/dashboard/zmanim'
+import { Tefilot } from './pages/dashboard/tefilot'
 import { RouteAppProps } from './types/routes'
 import { ZmaneiAyom } from './pages/dashboard/zmanei-ayom'
 
@@ -29,9 +29,9 @@ export const routes: RouteAppProps[] = [
       },
       {
         icon: <ClockIcon {...icon} />,
-        name: 'zmanim',
-        path: '/zmanim',
-        element: <Zmanim />,
+        name: 'tefilot',
+        path: '/tefilot',
+        element: <Tefilot />,
       },
       {
         icon: <ClockIcon {...icon} />,

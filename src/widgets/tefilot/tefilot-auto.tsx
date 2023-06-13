@@ -23,7 +23,7 @@ export const ZmanimAuto = () => {
   const [zmanimList, setZmanimList] = useState<ZmanimList>([])
   const getZmanim = async () => {
     const response = await getZmanimForZmanimAuto(actualCityForZamnim)
-    const data = response.data
+    const data = response.data as any
     const zmanim = data?.zmanim?.Zmanim
     if (!zmanim) {
       toast.error('not found data')

@@ -13,7 +13,7 @@ export const ZmaneiAyomList = ({ data, isLoading }: Props) => {
   // console.log('data: ', data)
   if (isLoading) return <Spinner className={'h-20 w-20'} />
   if (!data) return <h1>pas encore de data</h1>
-  const { metadata, Zmanim, BasicZmanim } = data.zmanim
+  const { metadata, Zmanim, BasicZmanim } = data.data
   return (
     <div className="mt-10">
       <ItemList data={metadata} dataName="MetaData" />

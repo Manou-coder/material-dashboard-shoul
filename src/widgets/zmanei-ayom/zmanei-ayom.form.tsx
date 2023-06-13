@@ -45,13 +45,7 @@ export const ZmaneiAyomForm = ({
 }: Props) => {
   const { errors } = formState ?? {}
   // console.log('watch: ', watch())
-  // console.log('errors: ', errors)
-  // console.log('rerender form')
   const currentDate = new Date().toISOString().split('T')[0]
-  // console.log('defaultValues[complexZmanim]: ', defaultValues['complexZmanim'])
-  const defaultChecked =
-    defaultValues['complexZmanim'] === 'true' ? true : false
-  // console.log('defaultChecked: ', defaultChecked)
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-12 gap-2">
@@ -113,7 +107,7 @@ export const ZmaneiAyomForm = ({
         </div>
         <div className="col-span-12 md:col-span-3">
           <CustomInput
-            min={0}
+            // min={0}
             defaultValue={defaultValues['elevation'] || '0'}
             type="number"
             register={register}
