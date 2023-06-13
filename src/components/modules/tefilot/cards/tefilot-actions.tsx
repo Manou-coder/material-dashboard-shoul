@@ -6,7 +6,7 @@ import { TefilotFormAuto } from '../forms/tefilot-form-auto'
 import { TefilotFormManual } from '../forms/tefilot-form-manual'
 import { useCityStore } from '@/utils/store/cityStore'
 import { toast } from 'react-toastify'
-import { Modal } from '@/widgets/modal/modal'
+import { Modal } from '@/components/modal/modal'
 
 interface Props {
   withTrash?: boolean

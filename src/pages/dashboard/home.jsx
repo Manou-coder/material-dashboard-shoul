@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   Typography,
   Card,
@@ -12,21 +12,21 @@ import {
   Avatar,
   Tooltip,
   Progress,
-} from "@material-tailwind/react";
+} from '@material-tailwind/react'
 import {
   ClockIcon,
   CheckIcon,
   EllipsisVerticalIcon,
   ArrowUpIcon,
-} from "@heroicons/react/24/outline";
-import { StatisticsCard } from "@/widgets/cards";
-import { StatisticsChart } from "@/widgets/charts";
+} from '@heroicons/react/24/outline'
+import { StatisticsCard } from '@/components/cards'
+import { StatisticsChart } from '@/components/charts'
 import {
   statisticsCardsData,
   statisticsChartsData,
   projectsTableData,
   ordersOverviewData,
-} from "@/data";
+} from '@/data'
 
 export function Home() {
   return (
@@ -38,7 +38,7 @@ export function Home() {
             {...rest}
             title={title}
             icon={React.createElement(icon, {
-              className: "w-6 h-6 text-white",
+              className: 'w-6 h-6 text-white',
             })}
             footer={
               <Typography className="font-normal text-blue-gray-600">
@@ -107,7 +107,7 @@ export function Home() {
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["companies", "members", "budget", "completion"].map(
+                  {['companies', 'members', 'budget', 'completion'].map(
                     (el) => (
                       <th
                         key={el}
@@ -129,9 +129,9 @@ export function Home() {
                   ({ img, name, members, budget, completion }, key) => {
                     const className = `py-3 px-5 ${
                       key === projectsTableData.length - 1
-                        ? ""
-                        : "border-b border-blue-gray-50"
-                    }`;
+                        ? ''
+                        : 'border-b border-blue-gray-50'
+                    }`
 
                     return (
                       <tr key={name}>
@@ -156,7 +156,7 @@ export function Home() {
                                 size="xs"
                                 variant="circular"
                                 className={`cursor-pointer border-2 border-white ${
-                                  key === 0 ? "" : "-ml-2.5"
+                                  key === 0 ? '' : '-ml-2.5'
                                 }`}
                               />
                             </Tooltip>
@@ -181,13 +181,13 @@ export function Home() {
                             <Progress
                               value={completion}
                               variant="gradient"
-                              color={completion === 100 ? "green" : "blue"}
+                              color={completion === 100 ? 'green' : 'blue'}
                               className="h-1"
                             />
                           </div>
                         </td>
                       </tr>
-                    );
+                    )
                   }
                 )}
               </tbody>
@@ -222,8 +222,8 @@ export function Home() {
                   <div
                     className={`relative p-1 after:absolute after:-bottom-6 after:left-2/4 after:w-0.5 after:-translate-x-2/4 after:bg-blue-gray-50 after:content-[''] ${
                       key === ordersOverviewData.length - 1
-                        ? "after:h-0"
-                        : "after:h-4/6"
+                        ? 'after:h-0'
+                        : 'after:h-4/6'
                     }`}
                   >
                     {React.createElement(icon, {
@@ -253,7 +253,7 @@ export function Home() {
         </Card>
       </div>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home

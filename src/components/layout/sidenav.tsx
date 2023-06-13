@@ -100,6 +100,6 @@ Sidenav.propTypes = {
   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
-Sidenav.displayName = '/src/widgets/layout/sidnave.jsx'
+Sidenav.displayName = '/src/components/layout/sidnave.jsx'
 
 export default Sidenav

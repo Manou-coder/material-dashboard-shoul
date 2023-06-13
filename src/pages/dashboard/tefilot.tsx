@@ -1,4 +1,4 @@
-import { TefilotContainer } from '@/widgets/modules/tefilot/tefilot.container'
+import { TefilotContainer } from '@/components/modules/tefilot/tefilot.container'
 
 export const Tefilot = () => {
   return <TefilotContainer />
