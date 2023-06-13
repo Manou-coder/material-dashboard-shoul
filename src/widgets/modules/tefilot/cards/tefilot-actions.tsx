@@ -1,12 +1,12 @@
 import { PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { IconButton, Switch } from '@material-tailwind/react'
-import { Modal } from '../../modal/modal'
 import { useToggle } from '@/utils/hooks/use-toggle'
 import { useState } from 'react'
 import { TefilotFormAuto } from '../forms/tefilot-form-auto'
 import { TefilotFormManual } from '../forms/tefilot-form-manual'
 import { useCityStore } from '@/utils/store/cityStore'
 import { toast } from 'react-toastify'
+import { Modal } from '@/widgets/modal/modal'
 
 interface Props {
   withTrash?: boolean
