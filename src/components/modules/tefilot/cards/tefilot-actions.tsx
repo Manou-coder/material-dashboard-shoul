@@ -15,7 +15,7 @@ interface Props {
   tefila: Tefila
 }
 
-export const TefilotActions = ({ withTrash = false }: Props) => {
+export const TefilotActions = ({ withTrash = false, yom, tefila }: Props) => {
   const { value: open, setValue: setOpen, toggle: toggleOpen } = useToggle()
   const [auto, setAuto] = useState<boolean>(false)
   const actualCityForZamnim = useCityStore((state) => state.actualCityForZamnim)
@@ -51,7 +51,11 @@ export const TefilotActions = ({ withTrash = false }: Props) => {
           defaultChecked={false}
           label="Auto"
         />
-        {!auto ? <TefilotFormManual /> : <TefilotFormAuto />}
+        {!auto ? (
+          <TefilotFormManual yom={yom} tefila={tefila} />
+        ) : (
+          <TefilotFormAuto />
+        )}
       </Modal>
     </>
   )

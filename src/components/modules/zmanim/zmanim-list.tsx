@@ -1,7 +1,10 @@
+import { basicZmanimList } from '@/data/basic-zmanim-list'
 import { formatDate } from '@/lib/dates'
-import { convertCamelCaseToWords } from '@/lib/string'
+import { convertCamelCaseToWords, isBasicZmanimKey } from '@/lib/string'
 import { MetaData, ZmanimData } from '@/types/zmanim'
-import { Spinner, Typography, TypographyProps } from '@material-tailwind/react'
+import { Spinner, Switch, Typography, list } from '@material-tailwind/react'
+import clsx from 'clsx'
+import { useMemo, useState } from 'react'
 
 interface Props extends ZmanimData {
   isLoading: boolean
@@ -30,19 +33,45 @@ interface ItemListProps {
 }
 
 const ItemList = ({ data, dataName, isOnlyDate = false }: ItemListProps) => {
-  // console.log('data: ', data)
-  if (!data) return null
+  const [isCompleteZmanim, setIsCompleteZmanim] = useState<boolean>(false)
+
+  const listZmanim = useMemo(() => {
+    if (!data) return []
+    if (!isCompleteZmanim && isOnlyDate) {
+      return Object.entries(data).filter((d) => isBasicZmanimKey(d[0]))
+    } else {
+      return Object.entries(data)
+    }
+  }, [data, isCompleteZmanim])
+
   return (
     <>
-      <Typography variant="h2" className="mt-2 mb-1 text-center">
-        {dataName}
-      </Typography>
-      {Object.entries(data).map(([key, value]) => (
+      <div className="flex flex-col justify-center items-center">
+        <Typography variant="h2">{dataName}</Typography>
+        {isOnlyDate && (
+          <div>
+            <Switch
+              onChange={(e) => setIsCompleteZmanim(e.target.checked)}
+              defaultChecked={false}
+              label="All Zmanim"
+            />
+          </div>
+        )}
+      </div>
+      {listZmanim.map(([key, value]) => (
         <div key={key} className="flex justify-between items-center">
-          <Typography variant="lead" color="gray" className="">
+          <Typography
+            variant="lead"
+            color={isBasicZmanimKey(key) ? 'black' : 'gray'}
+            className={clsx(isBasicZmanimKey(key) ? 'font-bold' : '')}
+          >
             {convertCamelCaseToWords(key)}:
           </Typography>
-          <Typography variant="lead" color="gray" className="">
+          <Typography
+            variant="lead"
+            color={isBasicZmanimKey(key) ? 'black' : 'gray'}
+            className={clsx(isBasicZmanimKey(key) ? 'font-bold' : '')}
+          >
             {isOnlyDate ? formatDate(value.toString()) : value.toString()}
           </Typography>
         </div>

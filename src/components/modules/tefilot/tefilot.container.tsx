@@ -3,7 +3,6 @@ import { TefilotView } from './tefilot.view'
 
 export const TefilotContainer = () => {
   const { data, isError, isLoading, error } = useTefilot()
-  console.log('error: ', error)
-  console.log('data àà: ', data)
+  console.log('data rerender: ', data)
   return <TefilotView data={data} />
 }

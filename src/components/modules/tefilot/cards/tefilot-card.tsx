@@ -31,7 +31,7 @@ export const TefilotCard = ({ color = 'red', yom }: Props) => {
             <TefilotZman
               key={yom.id}
               yom={yom}
-              tefila_name={capitalizeFirstLetter(tefila.tefila_name)}
+              tefila_name={tefila.tefila_name}
               schedule={tefila.schedule}
             />
           ))}

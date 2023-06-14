@@ -1,3 +1,5 @@
+import { basicZmanimList } from '@/data/basic-zmanim-list'
+
 export const capitalizeFirstLetter = (str: string | undefined): string => {
   if (!str) return ''
   return str.charAt(0).toUpperCase() + str.slice(1)
@@ -23,4 +25,9 @@ export const converAllValuesToString = (obj: object) => {
     console.log('error: ', error)
     return objWithStrings
   }
+}
+
+export const isBasicZmanimKey = (key: string) => {
+  console.log('basicZmanimList: ', basicZmanimList)
+  return basicZmanimList.includes(key)
 }

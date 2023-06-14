@@ -24,7 +24,8 @@ export const ZmanimContainer = () => {
     useForm<Inputs>({ resolver: zodResolver(schema) })
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
-    const newCity = { ...formData, id: uuidv4() }
+    // add id and force complex zmanim
+    const newCity = { ...formData, id: uuidv4(), complexZmanim: true }
     mutate(newCity)
   }
 
