@@ -21,7 +21,7 @@ type ZodInputs = z.infer<typeof schema>
 export type Inputs = ZodInputs & { id?: string }
 
 export const schemaTefilotFormAuto = z.object({
-  addOrRemove: z.string().min(1, { message: errorMessageRequired }),
+  // addOrRemove: z.string().min(1, { message: errorMessageRequired }),
   referTo: z
     .string({
       required_error: errorMessageRequired,

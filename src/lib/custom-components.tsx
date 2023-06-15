@@ -97,7 +97,6 @@ export const CustomSelect = <T,>({
       return
     }
     addRedStarToLabel(inputRef.current, required, labelName)
-    addDefaultValues(inputRef.current, defaultValue)
   }, [inputRef, defaultValue])
 
   return (
@@ -109,10 +108,10 @@ export const CustomSelect = <T,>({
         render={({ field }) => (
           <Select
             className={className}
-            {...field}
+            onChange={field.onChange}
+            defaultValue={field.value}
             label={labelName}
             error={errors && errors[inputName] ? true : false}
-            // value="" value ne marche pas avec le controller de form
           >
             {children}
           </Select>
@@ -139,18 +138,6 @@ function addRedStarToLabel(
   if (labelDiv && required) {
     labelDiv.innerHTML =
       labelName + '<span class="inline-block text-red-500 ml-0.5">*</span>'
-  }
-}
-
-function addDefaultValues(
-  ref: HTMLDivElement,
-  value: string | number | readonly string[] | undefined
-) {
-  const firstChild = ref.children[0]
-  const buttonDiv = firstChild && firstChild.children[0]
-  const spanDiv = buttonDiv && buttonDiv.children[0]
-  if (spanDiv && typeof value === 'string') {
-    spanDiv.innerHTML = value
   }
 }
 

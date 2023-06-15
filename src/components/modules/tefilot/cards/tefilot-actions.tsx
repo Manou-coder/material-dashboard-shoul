@@ -48,7 +48,7 @@ export const TefilotActions = ({ withTrash = false, yom, tefila }: Props) => {
       >
         <Switch
           onChange={(e) => setAuto(e.target.checked)}
-          defaultChecked={false}
+          defaultChecked={auto}
           label="Auto"
         />
         {!auto ? (

@@ -31,6 +31,7 @@ export const TefilotFormAuto = () => {
 
   const onSubmit: SubmitHandler<TefilotFormInputs> = async (formData) => {
     console.log('formData: ', formData)
+    alert(formData.referTo)
   }
 
   // console.log('listZmanim: ', listZmanim)
@@ -40,7 +41,7 @@ export const TefilotFormAuto = () => {
         <Typography variant="h5">ZmanimAuto</Typography>
         <Input label="exemple" disabled defaultValue={exampleValue} />
         <CustomSelect<keyof TefilotFormInputs>
-          defaultValue={''}
+          defaultValue={'hello'}
           required
           control={control}
           register={register}
