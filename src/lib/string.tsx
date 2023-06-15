@@ -1,7 +1,7 @@
 import { basicZmanimList } from '@/data/basic-zmanim-list'
 
-export const capitalizeFirstLetter = (str: string | undefined): string => {
-  if (!str) return ''
+export const capitalizeFirstLetter = (str: unknown | undefined): string => {
+  if (!str || typeof str !== 'string') return ''
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 

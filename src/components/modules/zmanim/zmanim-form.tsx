@@ -4,6 +4,7 @@ import {
   CustomInput,
   CustomSelect,
 } from '@/lib/custom-components'
+import { Inputs } from '@/lib/validation-zod'
 import { ZmanimFormTypes } from '@/types/zmanim-form-types'
 import { Checkbox, Option, Typography } from '@material-tailwind/react'
 import { v4 as uuidv4 } from 'uuid'
@@ -50,14 +51,13 @@ export const ZmanimForm = ({ form }: Props) => {
           />
         </div>
         <div className="col-span-12 md:col-span-6">
-          <CustomSelect
+          <CustomSelect<keyof Inputs>
             defaultValue={defaultValues['timeZoneId'] || ''}
             required
             control={control}
             register={register}
             labelName="Time Zone ID"
             inputName="timeZoneId"
-            list={[...timeZoneIdList]}
             errors={errors}
           >
             {[...timeZoneIdList].map((element) => (

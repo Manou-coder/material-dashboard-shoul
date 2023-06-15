@@ -70,28 +70,27 @@ export const CustomInput = ({
 
 type OptionalChildrenSelectProps = Omit<SelectProps, 'children'>
 
-interface CustomSelectProps extends OptionalChildrenSelectProps {
+interface CustomSelectProps<T> extends OptionalChildrenSelectProps {
   control: Control<any>
-  list: string[]
-  inputName: string
+  inputName: T
   register: UseFormRegister<any>
   labelName?: string
   required?: boolean
   errors?: any
   children: ReactNode
+  defaultValue?: any
 }
 
-export const CustomSelect = ({
+export const CustomSelect = <T,>({
   children,
   defaultValue,
   className,
   control,
-  list,
   inputName,
   labelName = capitalizeFirstLetter(inputName),
   required = false,
   errors,
-}: CustomSelectProps) => {
+}: CustomSelectProps<T & string>) => {
   const inputRef = useRef<HTMLDivElement | null>(null)
   useEffect(() => {
     if (!inputRef.current) {
