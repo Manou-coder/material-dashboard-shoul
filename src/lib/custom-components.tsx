@@ -78,10 +78,11 @@ interface CustomSelectProps extends OptionalChildrenSelectProps {
   labelName?: string
   required?: boolean
   errors?: any
-  children?: ReactNode
+  children: ReactNode
 }
 
 export const CustomSelect = ({
+  children,
   defaultValue,
   className,
   control,
@@ -114,12 +115,7 @@ export const CustomSelect = ({
             error={errors && errors[inputName] ? true : false}
             // value="" value ne marche pas avec le controller de form
           >
-            {list &&
-              list.map((element) => (
-                <Option key={uuidv4()} value={element}>
-                  {element}
-                </Option>
-              ))}
+            {children}
           </Select>
         )}
       />

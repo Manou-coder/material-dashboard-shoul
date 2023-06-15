@@ -5,7 +5,8 @@ import {
   CustomSelect,
 } from '@/lib/custom-components'
 import { ZmanimFormTypes } from '@/types/zmanim-form-types'
-import { Checkbox, Typography } from '@material-tailwind/react'
+import { Checkbox, Option, Typography } from '@material-tailwind/react'
+import { v4 as uuidv4 } from 'uuid'
 
 interface Props {
   form: ZmanimFormTypes
@@ -58,7 +59,13 @@ export const ZmanimForm = ({ form }: Props) => {
             inputName="timeZoneId"
             list={[...timeZoneIdList]}
             errors={errors}
-          />
+          >
+            {[...timeZoneIdList].map((element) => (
+              <Option key={uuidv4()} value={element}>
+                {element}
+              </Option>
+            ))}
+          </CustomSelect>
         </div>
         <div className="col-span-12 md:col-span-3">
           <CustomInput

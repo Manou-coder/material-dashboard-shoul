@@ -28,6 +28,6 @@ export const converAllValuesToString = (obj: object) => {
 }
 
 export const isBasicZmanimKey = (key: string) => {
-  console.log('basicZmanimList: ', basicZmanimList)
+  // console.log('basicZmanimList: ', basicZmanimList)
   return basicZmanimList.includes(key)
 }

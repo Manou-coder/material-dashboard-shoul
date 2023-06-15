@@ -191,9 +191,7 @@ type Zmanim = {
 }
 
 export interface ZmanimData {
-  data: {
-    metadata: MetaData
-    Zmanim: Zmanim
-    BasicZmanim: Partial<Zmanim>
-  }
+  metadata: MetaData
+  Zmanim: Zmanim
+  BasicZmanim?: Partial<Zmanim>
 }

@@ -6,22 +6,19 @@ import { Spinner, Switch, Typography, list } from '@material-tailwind/react'
 import clsx from 'clsx'
 import { useMemo, useState } from 'react'
 
-interface Props extends ZmanimData {
+interface Props {
   isLoading: boolean
+  data: ZmanimData
 }
 
 export const ZmanimList = ({ data, isLoading }: Props) => {
   if (isLoading) return <Spinner className={'h-20 w-20'} />
   if (!data) return <h1>pas encore de data</h1>
-  const { metadata, Zmanim, BasicZmanim } = data
+  const { metadata, Zmanim } = data
   return (
     <div className="mt-10">
       <ItemList data={metadata} dataName="MetaData" />
-      <ItemList
-        data={Zmanim ? Zmanim : BasicZmanim}
-        dataName="Zmanim"
-        isOnlyDate
-      />
+      <ItemList data={Zmanim} dataName="Zmanim" isOnlyDate />
     </div>
   )
 }
