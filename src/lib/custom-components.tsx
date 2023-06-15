@@ -98,7 +98,7 @@ export const CustomSelect = <T,>({
     }
     addRedStarToLabel(inputRef.current, required, labelName)
     addDefaultValues(inputRef.current, defaultValue)
-  }, [inputRef])
+  }, [inputRef, defaultValue])
 
   return (
     <div ref={inputRef} className="col-span-6">
