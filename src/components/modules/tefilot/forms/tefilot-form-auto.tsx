@@ -1,9 +1,13 @@
+import { CustomSelect } from '@/lib/custom-components'
 import { formatDate } from '@/lib/dates'
 import { convertCamelCaseToWords, isBasicZmanimKey } from '@/lib/string'
+import { TefilotFormInputs, schemaTefilotFormAuto } from '@/lib/validation-zod'
 import { useZmanim } from '@/utils/hooks/use-zmanim'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Input, Option, Select, Typography } from '@material-tailwind/react'
 import clsx from 'clsx'
 import { useMemo, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid'
 
 export const TefilotFormAuto = () => {
@@ -11,6 +15,10 @@ export const TefilotFormAuto = () => {
   const [referValue, setReferValue] = useState<string>('')
   const { data, error, isLoading } = useZmanim()
   // console.log('data BB: ', data)
+
+  const { register, handleSubmit, watch, control, setError, formState, reset } =
+    useForm<TefilotFormInputs>({ resolver: zodResolver(schemaTefilotFormAuto) })
+  const { errors } = formState ?? {}
 
   const listZmanim = useMemo(() => {
     if (!data || !data.Zmanim) return []
@@ -26,7 +34,14 @@ export const TefilotFormAuto = () => {
     <div className="space-y-2">
       <Typography variant="h5">ZmanimAuto</Typography>
       <Input label="exemple" disabled defaultValue={exampleValue} />
-      <Select label="Refer to">
+      <CustomSelect<keyof TefilotFormInputs>
+        required
+        control={control}
+        register={register}
+        labelName="Refer to"
+        inputName="referTo"
+        errors={errors}
+      >
         {listZmanim &&
           listZmanim.map(([key, value]) => (
             <Option
@@ -53,7 +68,7 @@ export const TefilotFormAuto = () => {
               </div>
             </Option>
           ))}
-      </Select>
+      </CustomSelect>
       <Input
         onChange={(e) =>
           setExampleValue(manipulateDateByMinutes(referValue, e.target.value))
