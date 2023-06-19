@@ -15,7 +15,14 @@ export const TefilotZman = ({ yom, tefila_name, schedule }: Props) => {
         <Typography variant="h5">
           {capitalizeFirstLetter(tefila_name)} :
         </Typography>
-        <Typography variant="h5">{schedule}</Typography>
+        <Typography variant="h5">
+          {schedule.length < 6
+            ? schedule
+            : new Date(schedule).toLocaleTimeString('fr', {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+        </Typography>
       </div>
     </ListItem>
   )

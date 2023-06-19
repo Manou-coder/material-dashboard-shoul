@@ -52,7 +52,7 @@ export const TefilotFormAuto = ({ tefila, yom }: Props) => {
 
   const onSubmit: SubmitHandler<TefilotFormInputs> = async (formData) => {
     console.log('formData: ', formData)
-    const shedule = `${formData.referTo}, ${formData.addOrRemove}, ${formData.nearest}`
+    const shedule = `${formData.referTo},${formData.addOrRemove},${formData.nearest}`
     const tefilot = updateTefilot(dataTefilot, yom, tefila, shedule)
     console.log('tefilot: ', tefilot)
     if (!tefilot) {
