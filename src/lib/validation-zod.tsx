@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { RoundDirection } from './round-direction'
 
 const errorMessageRequired = 'This field is required'
 
@@ -21,7 +22,8 @@ type ZodInputs = z.infer<typeof schema>
 export type Inputs = ZodInputs & { id?: string }
 
 export const schemaTefilotFormAuto = z.object({
-  // addOrRemove: z.string().min(1, { message: errorMessageRequired }),
+  addOrRemove: z.string().nullish(),
+  nearest: z.string().nullish(),
   referTo: z
     .string({
       required_error: errorMessageRequired,
@@ -29,4 +31,6 @@ export const schemaTefilotFormAuto = z.object({
     .min(1, { message: errorMessageRequired }),
 })
 
-export type TefilotFormInputs = z.infer<typeof schemaTefilotFormAuto>
+export type TefilotFormInputs = z.infer<typeof schemaTefilotFormAuto> & {
+  nearest: RoundDirection
+}

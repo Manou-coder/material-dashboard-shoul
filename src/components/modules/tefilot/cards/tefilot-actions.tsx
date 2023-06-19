@@ -54,7 +54,7 @@ export const TefilotActions = ({ withTrash = false, yom, tefila }: Props) => {
         {!auto ? (
           <TefilotFormManual yom={yom} tefila={tefila} />
         ) : (
-          <TefilotFormAuto />
+          <TefilotFormAuto yom={yom} tefila={tefila} />
         )}
       </Modal>
     </>

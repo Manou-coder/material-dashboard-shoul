@@ -32,7 +32,7 @@ export const TefilotFormManual = ({ yom, tefila }: Props) => {
   const { mutate, isPostLoading } = usePostTefilot()
 
   const onSubmit: SubmitHandler<TefilaInputs> = async (formData) => {
-    const tefilot = updateTefilot(data, yom, tefila, formData)
+    const tefilot = updateTefilot(data, yom, tefila, formData.schedule)
     if (!tefilot) {
       toast.error('error when update tefila')
       return
@@ -61,11 +61,11 @@ export const TefilotFormManual = ({ yom, tefila }: Props) => {
   )
 }
 
-const updateTefilot = (
+export const updateTefilot = (
   tefilot: Yom[] | null | undefined,
   yom: Yom,
   tefila: Tefila,
-  formData: TefilaInputs
+  schedule: string
 ) => {
   if (!tefilot) return null
 
@@ -81,7 +81,7 @@ const updateTefilot = (
   if (tefilaIndex === -1) return null
 
   const selectedTefila = selectedTefilot[tefilaIndex]
-  selectedTefila.schedule = formData.schedule
+  selectedTefila.schedule = schedule
 
   // update created date
   tefilot[yomIndex].created_at = new Date().toUTCString()
