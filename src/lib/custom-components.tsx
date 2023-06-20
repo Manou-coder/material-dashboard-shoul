@@ -161,12 +161,15 @@ export const CustomButton = ({
   className,
   isLoading = false,
   children,
+  ...rest
 }: CustomButtonProps) => {
   return (
     <Button
       className={clsx(className, 'flex justify-center items-center')}
       disabled={isLoading}
       type="submit"
+      {...rest}
+      ref={() => rest.ref}
     >
       {isLoading ? <Spinner className={'h-4 w-4'} /> : children}
     </Button>
