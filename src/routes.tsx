@@ -1,8 +1,5 @@
 import {
-  HomeIcon,
-  UserCircleIcon,
-  TableCellsIcon,
-  BellIcon,
+  CogIcon,
   ClockIcon,
   PhotoIcon,
   BookOpenIcon,
@@ -11,6 +8,7 @@ import { Tefilot } from './pages/dashboard/tefilot'
 import { RouteAppProps } from './types/routes'
 import { Zmanim } from './pages/dashboard/zmanim'
 import { Images } from './pages/dashboard/images'
+import { SystemContainer } from './components/modules/system/system.container'
 
 const icon = {
   className: 'w-5 h-5 text-inherit',
@@ -37,6 +35,12 @@ export const routes: RouteAppProps[] = [
         name: 'images',
         path: '/images',
         element: <Images />,
+      },
+      {
+        icon: <CogIcon {...icon} />,
+        name: 'system',
+        path: '/system',
+        element: <SystemContainer />,
       },
     ],
   },
